@@ -1,9 +1,9 @@
-output "workspace_name" {
+output "name" {
   description = "Workspace Name"
   value       = tfe_workspace.workspace.name
 }
 
-output "workspace_id" {
+output "id" {
   description = "Workspace id"
   value       = tfe_workspace.workspace.id
 }
