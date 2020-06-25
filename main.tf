@@ -11,3 +11,14 @@ resource "tfe_workspace" "workspace" {
     branch         = var.vcs_branch
   }
 }
+
+resource "tfe_variable" "variable" {
+  for_each     = toset(keys(var.variables))
+  key          = each.value
+  value        = lookup(var.variables[each.value], "value", "")
+  category     = lookup(var.variables[each.value], "category", "terraform")
+  description  = lookup(var.variables[each.value], "description", "")
+  sensitive    = lookup(var.variables[each.value], "sensitive", false)
+  hcl          = lookup(var.variables[each.value], "hcl", false)
+  workspace_id = tfe_workspace.workspace.id
+}

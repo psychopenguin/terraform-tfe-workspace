@@ -40,3 +40,21 @@ variable "working_directory" {
   description = "Working directory, relative to root path of VCS repo"
   default     = ""
 }
+
+variable "variables" {
+  type        = map(any)
+  description = "List of variables to be defined"
+  default     = {}
+  # Example:
+  # variables = {
+  #   "sample_variable": {
+  #     "value": "sample_value",
+  #     "category": "terraform"
+  #   },
+  #   "SAMPLE_ENV_VAR": {
+  #     "value": "some_secret_value",
+  #     "category": "env",
+  #     "sensitive": true
+  #   }
+  # }
+}
