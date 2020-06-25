@@ -58,3 +58,9 @@ variable "variables" {
   #   }
   # }
 }
+
+variable "run_trigger_workspaces" {
+  type        = set(string)
+  description = "List of workspaces that will trigger a run in case of changes"
+  default     = []
+}

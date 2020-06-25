@@ -22,3 +22,14 @@ resource "tfe_variable" "variable" {
   hcl          = lookup(var.variables[each.value], "hcl", false)
   workspace_id = tfe_workspace.workspace.id
 }
+
+data "tfe_workspace_ids" "trigger_ws" {
+  organization = var.organization
+  names        = toset(var.run_trigger_workspaces)
+}
+
+resource "tfe_run_trigger" "run_trigger" {
+  for_each      = data.tfe_workspace_ids.trigger_ws.external_ids
+  workspace_id  = tfe_workspace.workspace.id
+  sourceable_id = each.value
+}
